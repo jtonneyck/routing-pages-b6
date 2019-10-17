@@ -5,23 +5,27 @@ import {Link, Route} from 'react-router-dom';
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
+import students from "./data/students.json";
+import StudentDetail from "./Components/StudentDetail";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
+      <div className="sidebar">
+        {
+          students.map((student)=> 
+            <Link to={`/student-detail/${student.firstname}`}>
+              {student.firstname}
+            </Link>
+          )
+        }
+                    
+      </div>
 
-      <Link to="/Home">Home</Link>
-      <Link to="/About">About</Link>
-      <Link to="/Contact">Contact</Link>
-
-      {/* Notation 1 */}
-      {/* <Route path="/home">
-        <Home/>
-      </Route> */}
-
-      <Route path="/home" component={Home} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/about" component={About} />
+      <div className="student-detail-container">
+        <Route path="/student-detail/:firstname" component={StudentDetail} />
+      </div>
 
     </div>
   );
